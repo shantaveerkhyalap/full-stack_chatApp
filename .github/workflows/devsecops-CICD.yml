@@ -45,11 +45,9 @@ jobs:
             severity: 'CRITICAL,HIGH'
 
   sonar-frontend:
-    name: SonarCloud Frontend Scan
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -60,18 +58,15 @@ jobs:
       with:
         args: >
           -Dsonar.organization=shantaveerkhyalap
-          -Dsonar.projectKey=shantaveerkhyalap
-          -Dsonar.projectName=myorg_frontend
+          -Dsonar.projectKey=shantaveerkhyalap_frontend
           -Dsonar.sources=frontend
-          -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
+
 
 
   sonar-backend:
-    name: SonarCloud Backend Scan
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
 
@@ -82,11 +77,8 @@ jobs:
       with:
         args: >
           -Dsonar.organization=shantaveerkhyalap
-          -Dsonar.projectKey=shantaveerkhyalap
-          -Dsonar.projectName=myorg_backend
+          -Dsonar.projectKey=shantaveerkhyalap_backend
           -Dsonar.sources=backend
-          -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
-
 
 
 
