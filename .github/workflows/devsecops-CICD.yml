@@ -39,8 +39,14 @@ jobs:
 
       - name: Gitleaks Scan
         run: |
-          gitleaks detect --source ./frontend --no-git --ignore-path .gitleaksignore --exit-code 1
-          gitleaks detect --source ./backend --no-git --ignore-path .gitleaksignore --exit-code 1
+          gitleaks detect --source ./frontend --no-git \
+          --ignore-path .gitleaksignore \
+          --exit-code 1 \
+          --config-path .gitleaks.toml  # Add config file
+          gitleaks detect --source ./backend --no-git \
+          --ignore-path .gitleaksignore \
+          --exit-code 1 \
+          --config-path .gitleaks.toml
 
 
 
