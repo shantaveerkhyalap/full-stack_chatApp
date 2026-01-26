@@ -50,23 +50,26 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: SonarQube Scan (client)
+    - name: SonarQube Scan (frontend)
       uses: sonarsource/sonarqube-scan-action@master
       with:
-        projectBaseDir: frontend   
+        projectBaseDir: frontend
         args: >
-          -Dsonar.projectKey=myorg_client
-          -Dsonar.projectName=myorg_client
+          -Dsonar.projectKey=myorg_frontend
+          -Dsonar.projectName=myorg_frontend
           -Dsonar.sources=.
-          -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**    
+          -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-    - name: Debug Sonar secrets
-      run: |
-            if [ -z "$SONAR_TOKEN" ]; then echo "SONAR_TOKEN missing"; fi
-            if [ -z "$SONAR_HOST_URL" ]; then echo "SONAR_HOST_URL missing"; fi
 
+    - name: Debug Sonar secrets (frontend)
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+      run: |
+        if [ -z "$SONAR_TOKEN" ]; then echo "SONAR_TOKEN missing"; else echo "SONAR_TOKEN OK"; fi
+        if [ -z "$SONAR_HOST_URL" ]; then echo "SONAR_HOST_URL missing"; else echo "SONAR_HOST_URL OK"; fi
 
   sonar-backend:
     runs-on: ubuntu-latest
@@ -74,34 +77,24 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
-    - name: SonarQube Scan (client)
+    - name: SonarQube Scan (backend)
       uses: sonarsource/sonarqube-scan-action@master
       with:
-        projectBaseDir: backend   
+        projectBaseDir: backend
         args: >
-          -Dsonar.projectKey=myorg_client
-          -Dsonar.projectName=myorg_client
+          -Dsonar.projectKey=myorg_backend
+          -Dsonar.projectName=myorg_backend
           -Dsonar.sources=.
-          -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**    
+          -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
-    - name: Debug Sonar secrets
+
+    - name: Debug Sonar secrets (backend)
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
       run: |
-        if [ -z "$SONAR_TOKEN" ]; then echo "SONAR_TOKEN missing"; fi
-        if [ -z "$SONAR_HOST_URL" ]; then echo "SONAR_HOST_URL missing"; fi
+        if [ -z "$SONAR_TOKEN" ]; then echo "SONAR_TOKEN missing"; else echo "SONAR_TOKEN OK"; fi
+        if [ -z "$SONAR_HOST_URL" ]; then echo "SONAR_HOST_URL missing"; else echo "SONAR_HOST_URL OK"; fi
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-          
