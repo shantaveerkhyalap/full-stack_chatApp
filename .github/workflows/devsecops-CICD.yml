@@ -140,7 +140,7 @@ jobs:
         uses: actions/checkout@v4
         
       - name: Run Trivy Image scan for Backend
-        uses: aquasecurity/trivy-action@v0.33.1
+        uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
           image-ref: shantaveerkhyalap/backend-chatapp:latest
@@ -151,7 +151,7 @@ jobs:
           severity: CRITICAL,HIGH
 
       - name: Run Trivy Image scan for frontend
-        uses: aquasecurity/trivy-action@v0.33.1
+        uses: aquasecurity/trivy-action@master
         with:
           scan-type: image
           image-ref: shantaveerkhyalap/frontend-chatapp:latest
