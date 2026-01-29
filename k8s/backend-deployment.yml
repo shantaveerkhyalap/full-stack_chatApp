@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: chatapp-backend
-        image: shantaveerkhyalap/backend:4430b0eb352cde245172d511b318b161b4814f2c
+        image: shantaveerkhyalap/backend:48dd109b912a698a3f05c08ddc513562d294a5f7
         resources:
           limits:
             memory: "128Mi"
