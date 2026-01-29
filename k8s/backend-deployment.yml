@@ -30,7 +30,7 @@ spec:
                 - tws-cluster-worker  
       containers:
       - name: chatapp-backend
-        image: shantaveerkhyalap/backend:1c9c61252402510625409b6e2c34495626e32360
+        image: shantaveerkhyalap/backend:32a89f2afe9e873a50cb4a42ce65bcbaed76d4d9
         resources:
           limits:
             memory: "128Mi"
