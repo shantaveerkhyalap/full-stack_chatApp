@@ -14,7 +14,6 @@ spec:
       labels:
         app: backend
     spec:
-      # ADD THIS TOLERATIONS SECTION
       tolerations:
       - key: "prod"
         operator: "Equal"
@@ -31,7 +30,7 @@ spec:
                 - tws-cluster-worker  
       containers:
       - name: chatapp-backend
-        image: shantaveerkhyalap/backend:5992e39ad0eb858025bd14f0d12be709760a5003
+        image: shantaveerkhyalap/backend:27be5ada48638ff7b6f4692b6e9130ea0a86b913
         resources:
           limits:
             memory: "128Mi"
@@ -50,3 +49,12 @@ spec:
               key: jwt
         - name: PORT
           value: "5001"
+        # Use TCP probe since we know port 5001 is listening
+        readinessProbe:
+          tcpSocket:
+            port: 5001
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          successThreshold: 1
+          failureThreshold: 3
