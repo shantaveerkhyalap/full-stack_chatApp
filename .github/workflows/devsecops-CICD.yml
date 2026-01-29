@@ -107,12 +107,12 @@ jobs:
         file: ./frontend/Dockerfile
         push: false
         load: true
-        tags: shantaveerkhyalap/frontend-chatapp:${{ github.sha }}
+        tags: shantaveerkhyalap/frontend:${{ github.sha }}
 
     - name: Trivy Scan Frontend Image
       uses: aquasecurity/trivy-action@0.28.0
       with:
-        image-ref: shantaveerkhyalap/frontend-chatapp:${{ github.sha }}
+        image-ref: shantaveerkhyalap/frontend:${{ github.sha }}
         format: table
         exit-code: '0'
         ignore-unfixed: true
@@ -120,7 +120,7 @@ jobs:
         severity: CRITICAL,HIGH
 
     - name: Push Frontend Image
-      run: docker push shantaveerkhyalap/frontend-chatapp:${{ github.sha }}
+      run: docker push shantaveerkhyalap/frontend:${{ github.sha }}
 
 
   Build_backend_image_and_push:
@@ -150,12 +150,12 @@ jobs:
         file: ./backend/Dockerfile
         push: false
         load: true
-        tags: shantaveerkhyalap/backend-chatapp:${{ github.sha }}
+        tags: shantaveerkhyalap/backend:${{ github.sha }}
 
     - name: Trivy Scan Backend Image
       uses: aquasecurity/trivy-action@0.28.0
       with:
-        image-ref: shantaveerkhyalap/backend-chatapp:${{ github.sha }}
+        image-ref: shantaveerkhyalap/backend:${{ github.sha }}
         format: table
         exit-code: '0'
         ignore-unfixed: true
@@ -163,7 +163,7 @@ jobs:
         severity: CRITICAL,HIGH
 
     - name: Push Backend Image
-      run: docker push shantaveerkhyalap/backend-chatapp:${{ github.sha }}
+      run: docker push shantaveerkhyalap/backend:${{ github.sha }}
 
   update-k8s:
     name: Update Kubernetes Manifests (Frontend & Backend)
@@ -209,6 +209,8 @@ jobs:
         git add k8s/frontend-deployment.yml k8s/backend-deployment.yml
         git commit -m "chore(k8s): update frontend & backend images to sha-${GITHUB_SHA}" \
           || echo "No changes to commit"
+          
+        git pull --rebase origin main
         git push origin main
 
 
