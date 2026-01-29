@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: chatapp-backend
-        image: shantaveerkhyalap/chatapp-backend:55e1b1f97e5c82d3caa1e6788757b9cb9c3aae58
+        image: shantaveerkhyalap/backend:55e1b1f97e5c82d3caa1e6788757b9cb9c3aae58
         resources:
           limits:
             memory: "128Mi"
@@ -35,4 +35,5 @@ spec:
               key: jwt
         - name: PORT
           value: "5001"
+
 
